@@ -1,8 +1,8 @@
 <div class="container">
   <h1>Teddies</h1>
   <div class="row">
-    <% @teddies.each do |teddy| %>
-      <div class="col-6 col-md-4">
+    <div class="owl-carousel owl-theme">
+      <% @teddies.each do |teddy| %>
         <div class="card">
           <%= image_tag teddy.photo_url , class: "card-img-top" %>
           <div class="card-body">
@@ -12,7 +12,28 @@
             <%= link_to "More details", teddy_path(teddy), class: "btn btn-primary" %>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
+<%= content_for(:after_js) do %>
+  <script type="text/javascript">
+    $(function() {
+       $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+    })
+    });
+  </script>
+<% end %>
